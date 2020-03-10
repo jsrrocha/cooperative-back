@@ -1,8 +1,11 @@
 package com.challenge.cooperative.util;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.HttpEntity;
 import com.challenge.cooperative.model.Agenda;
 import com.challenge.cooperative.model.Associate;
 import com.challenge.cooperative.model.Vote;
@@ -25,12 +28,6 @@ public class TestUtil {
 		return agenda;
 	}
 	
-	public void deleteAgendaToTest(AgendaRepository agendaRepository) {
-		String name = "Teste abrindo uma votação em uma pauta";
-		Agenda agenda = agendaRepository.findByName(name);
-		agendaRepository.delete(agenda);
-	}
-	
 	public Associate createAssociateToTest(AssociateRepository associateRepository) {
 		String name = "Associado 1";
 		Associate associate = associateRepository.findByName(name);
@@ -41,6 +38,20 @@ public class TestUtil {
 		} 
 		return associate;
 	} 
+	
+	public HttpEntity<?>  buildEntity(Long associateId){
+		Map<String, Object> votingMap = new HashMap<String, Object>();
+		votingMap.put("vote", "Sim");
+		votingMap.put("associate", associateId);
+		HttpEntity<?> entity = new HttpEntity<>(votingMap);
+		return entity;
+
+	}
+	public void deleteAgendaToTest(AgendaRepository agendaRepository) {
+		String name = "Teste abrindo uma votação em uma pauta";
+		Agenda agenda = agendaRepository.findByName(name);
+		agendaRepository.delete(agenda);
+	}
 	
 	public void deleteAssociateToTest(AssociateRepository associateRepository) {
 		String name = "Associado 1";

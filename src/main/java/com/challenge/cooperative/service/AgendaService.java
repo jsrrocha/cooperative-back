@@ -30,7 +30,6 @@ public class AgendaService {
 	
 
 	public String validateAgendaMap(Map<String, String> agendaMap) {
-		
 		if (agendaMap.get("name") == null) {
 			return "Preencha o nome da pauta";
 		}
@@ -64,7 +63,20 @@ public class AgendaService {
 	}
 
 	public String validateVotingInput(Long id, Map<String, Object> voteMap) {
+		if (voteMap.get("vote") == null) {
+			return "Preencha o voto";
+		}
 
+		if (voteMap.get("associate") == null) {
+			return "Preencha o associado";
+		}
+
+		Optional<Associate> opcionalAssociate = associateRepository
+				.findById(Long.parseLong(voteMap.get("associate").toString()));
+		if (!opcionalAssociate.isPresent()) {
+			return "Associado não existe";
+		}
+		
 		Optional<Agenda> agenda = agendaRepository.findById(id);
 		if (!agenda.isPresent()) {
 			return "Agenda não existe";
@@ -80,21 +92,7 @@ public class AgendaService {
 		if (!foundOpenSession) {
 			return "Não existe votação aberta para essa pauta";
 		}
-
-		if (voteMap.get("vote") == null) {
-			return "Preencha o voto";
-		}
-
-		if (voteMap.get("associate") == null) {
-			return "Preencha o associado";
-		}
-
-		Optional<Associate> opcionalAssociate = associateRepository
-				.findById(Long.parseLong(voteMap.get("associate").toString()));
-		if (!opcionalAssociate.isPresent()) {
-			return "Associado não existe";
-		}
-
+		
 		Associate associate = opcionalAssociate.get();
 		Voting voting = votingList.get(0); 
 		if (associateAlreadyVoted(id, associate, voting.getVotes())) {
