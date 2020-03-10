@@ -24,7 +24,7 @@ chamar https://cooperative-sd.herokuapp.com/cooperative/agenda/{id}/voting com u
 "vote": "Sim",
 "associate": 1
 }
-.Sendo o id do associado no campo associate e é preciso, também, substituir o {id} pelo id da pauta.
+ O campo associate é preciso ser preenchido com o id do associado e é necessário, também, substituir o {id} pelo id da pauta.
 
 
 5) Obter resultado de uma votação de uma pauta: 
