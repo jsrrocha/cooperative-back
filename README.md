@@ -19,13 +19,12 @@ substituindo {id} e {time} pelo id da pauta e pelo tempo, em minutos, que a vota
 https://cooperative-sd.herokuapp.com/cooperative/agenda/1/voting/session/open/10
 
 4) Votar em uma pauta: 
-chamar https://cooperative-sd.herokuapp.com/cooperative/agenda/{id}/voting com um JSON, o campo associate é o id do associado. É preciso também, substituir o {id} pelo id da pauta, por exemplo: 
-
-https://cooperative-sd.herokuapp.com/cooperative/agenda/1/voting com JSON:
+chamar https://cooperative-sd.herokuapp.com/cooperative/agenda/{id}/voting com um JSON,por exemplo: 
 {
 "vote": "Sim",
 "associate": 1
 }
+.Sendo o id do associado no campo associate e é preciso, também, substituir o {id} pelo id da pauta.
 
 
 5) Obter resultado de uma votação de uma pauta: 
